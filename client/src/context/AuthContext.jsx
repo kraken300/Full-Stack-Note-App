@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setError(null); 
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('/api/auth/login', { email, password });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
       toast.success('Login successful!');
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     try {
       setError(null); 
-      const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+      const response = await axios.post('/api/auth/register', { name, email, password });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
       toast.success('Registration successful! Please log in.');

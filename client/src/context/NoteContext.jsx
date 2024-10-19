@@ -13,7 +13,7 @@ export const NoteProvider = ({ children }) => {
   const fetchNotes = async () => {
     if (!user) return;
     try {
-      const response = await axios.get('http://localhost:5000/api/notes', {
+      const response = await axios.get('/api/notes', {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -27,7 +27,7 @@ export const NoteProvider = ({ children }) => {
 
   const addNote = async (title, content) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/notes', { title, content }, {
+      const response = await axios.post('/api/notes', { title, content }, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -42,7 +42,7 @@ export const NoteProvider = ({ children }) => {
 
   const updateNote = async (id, title, content) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/notes/${id}`, { title, content }, {
+      const response = await axios.put(`/api/notes/${id}`, { title, content }, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -57,7 +57,7 @@ export const NoteProvider = ({ children }) => {
 
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+      await axios.delete(`/api/notes/${id}`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
