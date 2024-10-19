@@ -9,11 +9,23 @@ const noteRoutes = require('./routes/noteRoutes');
 dotenv.config();
 connectDB();
 
+const allowedOrigins = [
+  'https://full-stack-note-app-frontend.onrender.com',
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: 'https://full-stack-note-app-frontend.onrender.com',
-}));
+app.use(cors(corsOptions));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', noteRoutes);

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify'; 
 import AuthContext from './AuthContext';
 
+const apiUrl = 'https://full-stack-note-app-backend-uruo.onrender.com'; 
+
 const NoteContext = createContext();
 
 export const NoteProvider = ({ children }) => {
@@ -13,7 +15,7 @@ export const NoteProvider = ({ children }) => {
   const fetchNotes = async () => {
     if (!user) return;
     try {
-      const response = await axios.get('/api/notes', {
+      const response = await axios.get(`${apiUrl}/api/notes`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -27,7 +29,7 @@ export const NoteProvider = ({ children }) => {
 
   const addNote = async (title, content) => {
     try {
-      const response = await axios.post('/api/notes', { title, content }, {
+      const response = await axios.post(`${apiUrl}/api/notes`, { title, content }, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -42,7 +44,7 @@ export const NoteProvider = ({ children }) => {
 
   const updateNote = async (id, title, content) => {
     try {
-      const response = await axios.put(`/api/notes/${id}`, { title, content }, {
+      const response = await axios.put(`${apiUrl}/api/notes/${id}`, { title, content }, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -57,7 +59,7 @@ export const NoteProvider = ({ children }) => {
 
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`/api/notes/${id}`, {
+      await axios.delete(`${apiUrl}/api/notes/${id}`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
